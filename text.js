@@ -17,5 +17,21 @@ export class Text {
         const fontWidth = 700;
         const fontSize = 800;
         const fontName = 'Hind';
+
+        this.ctx.clearRect(0, 0, stageWidth, stageHeight);
+        this.ctx.font = '${fontWidth}, ${fontSize}px ${fontName}';
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+        this.ctx.textBaseline = 'middle';
+        const fontPos = this.ctx.measureText(myText);
+        this.ctx.fillText(
+            myText,
+            (stageWidth - fontPos.width) / 2,
+            fontPos.actualBoundingBoxAscent + fontPos.actualBoundingBoxDescent + ((stageHeight - fontSize) / 2));
+
+        return this.dotPos(density, stageWidth, stageHeight);
+    }
+
+    dotPos() {
+
     }
 }
