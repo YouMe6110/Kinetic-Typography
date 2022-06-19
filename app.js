@@ -17,6 +17,19 @@ class App {
             }
         });
     }
+
+    setWebgl() {
+        this.renderer = new devicePixelRatio.renderer({
+            width: document.body.clientWidth,
+            height: document.body.clientHeight,
+            antialias: true,
+            transparent: false,
+            resolution: (window.devicePixelRatio > 1) ? 2: 1,
+            autoDensity: true,
+            powerPreference: "high-performance",
+            backgroundColor: 0xffffff,
+        })
+    }
 }
 
 window.onload = () => {
