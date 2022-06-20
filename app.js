@@ -2,18 +2,18 @@ import {Text} from './text.js';
 
 class App {
     constructor() {
+        this.setWebgl();
+
         WebFont.load({
             google: {
                 families: ['Hind:700']
             },
             fontactive: () => {
-                this.text = new Text();
-                this.text.setText(
-                    'A',
-                    2,
-                    document.body.clientWidth,
-                    document.body.clientHeight,
-                );
+                
+                window.addEventListener('resize', this.resize.bind(this), false);
+                this.resize();
+
+                requestAnimationFrame(this.animate.bind(this));
             }
         });
     }
@@ -29,6 +29,9 @@ class App {
             powerPreference: "high-performance",
             backgroundColor: 0xffffff,
         })
+        document.body.appendChild(this.renderer.view);
+
+        this.stage = new PIXI.Container();
     }
 }
 
