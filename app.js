@@ -33,6 +33,19 @@ class App {
 
         this.stage = new PIXI.Container();
     }
+
+    resize() {
+        this.stageWidth = document.body.clientWidth;
+        this.stageHeight = document.body.clientHeight;
+
+        this.renderer.resize(this.stageWidth, this.stageHeight);
+    }
+
+    animate(t) {
+        requestAnimationFrame(this.animate.bind(this));
+
+        this.renderer.render(this.stage);
+    }
 }
 
 window.onload = () => {
