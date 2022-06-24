@@ -22,6 +22,26 @@ export class Visual {
         if (this.container) {
             stage.removeChild(this.container);
         }
+
+        this.pos = this.text.setText('A', stageWidth, stageHeight);
+
+        this.container = new PIXI.ParticleContainer (this.pos.length,
+            {
+                vertices: false,
+                position: true,
+                rotation: false,
+                scale: false,
+                uvs: false,
+                tint: false,
+            });
+            stage.addChild(this.container);
+
+            this.Particle = [];
+            for (let i = 0; i < this.pos.length; i++) {
+                const item = new Particle(this.pos[i], this.texture);
+                this.container.addChild(item.sprite);
+                this.Particle.push(item);
+            }
     }
 
     onMove(e) {
