@@ -30,10 +30,14 @@ class App {
             autoDensity: true,
             powerPreference: "high-performance",
             backgroundColor: 0xffffff,
-        })
+        });
         document.body.appendChild(this.renderer.view);
 
         this.stage = new PIXI.Container();
+
+        const blurFfilter = new PIXI.filters.blurFfilter();
+        blurFfilter.blur = 10;
+        blurFfilter.autoFit = true;
     }
 
     resize() {
