@@ -23,7 +23,7 @@ export class Visual {
             stage.removeChild(this.container);
         }
 
-        this.pos = this.text.setText('A', stageWidth, stageHeight);
+        this.pos = this.text.setText('A', 2, stageWidth, stageHeight);
 
         this.container = new PIXI.ParticleContainer (this.pos.length,
             {
@@ -42,6 +42,28 @@ export class Visual {
                 this.container.addChild(item.sprite);
                 this.Particle.push(item);
             }
+    }
+
+    animate() {
+        for (let i = 0; i < this.Particle.length; i++) {
+            const item = this.Particle[i];
+            const dx = this.mouse.x - item.x;
+            const dy = this.mouse.y - item.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const minDist = item.radius + this.mouse.radius;
+
+            if (dist < minDist) {
+                const angle = Math.atan2(dy, dx);
+                const tx = item.x + Math.cos(angle) * minDist;
+                const ty = item.y + Math.sign(angle) * minDist;
+                const ax = tx - this.mouse.x;
+                const ay = ty - this.mouse.y;
+                item.vx -= ax;
+                item.vy -= ay;
+            }
+
+            item.draw();
+        }
     }
 
     onMove(e) {

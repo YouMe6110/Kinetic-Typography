@@ -1,4 +1,4 @@
-import {Text} from './text.js';
+import {Visual} from './visual.js';
 
 class App {
     constructor() {
@@ -9,6 +9,8 @@ class App {
                 families: ['Hind:700']
             },
             fontactive: () => {
+
+                this.Visual = new Visual();
                 
                 window.addEventListener('resize', this.resize.bind(this), false);
                 this.resize();
@@ -39,10 +41,14 @@ class App {
         this.stageHeight = document.body.clientHeight;
 
         this.renderer.resize(this.stageWidth, this.stageHeight);
+
+        this.Visual.show(this.stageWidth, this.stageHeight, this.stage);
     }
 
     animate(t) {
         requestAnimationFrame(this.animate.bind(this));
+
+        this.Visual.animate();
 
         this.renderer.render(this.stage);
     }
